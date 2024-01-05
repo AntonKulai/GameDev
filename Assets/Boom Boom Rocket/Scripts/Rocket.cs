@@ -63,16 +63,13 @@ public class Rocket : MonoBehaviour {
             Jump(angle, normalJumpPower);
         }
 
-        // rotate rocket
         if (!isWaitingToStart && !isPowerJumping)
         {
             RotateRocket();
         }
         
-        // decelerate rocket speed
         DecelerateRocket();
         
-        // if a rocket goes down the screen, it explodes.
         Vector3 viewPos = Camera.main.WorldToViewportPoint(gameObject.transform.position);
         if (viewPos.y < 0)
         {
@@ -130,7 +127,6 @@ public class Rocket : MonoBehaviour {
         {
             Explode();
         }
-
         if (other.gameObject.tag == "Item")
         {
             StartCoroutine(PowerJump());
@@ -146,15 +142,12 @@ public class Rocket : MonoBehaviour {
     {
         isExploded = true;
         
-        // turn off spriteRenderer and rigidbody 
         gameObject.GetComponent<SpriteRenderer>().enabled = false;
         rb2D.velocity = Vector2.zero;
         rb2D.isKinematic = true;
 
-        // explode effect
         Destroy(Instantiate(DeadEffectPrefab, transform.position, Quaternion.identity), 1.5f);
         
-        // set to gameover
         GamePlayManager.Instance.GameOver();
         
         onRocketExploded?.Invoke();
@@ -163,7 +156,6 @@ public class Rocket : MonoBehaviour {
 
     IEnumerator PowerJump()
     {
-        // If the rocket has already exploded, break
         if (isExploded) yield break;
         
         onRocketPowerJumped?.Invoke();
@@ -176,31 +168,22 @@ public class Rocket : MonoBehaviour {
         
         Jump(0, specialJumpPower);
         
-        // power jump effect
         Instantiate(pfPowerJumpParticle, transform.position, Quaternion.identity);
         
-        // shield effect
         shieldObj.SetActive(true);
 
-
-        // power jump for 0.5 seconds.
         yield return new WaitForSecondsRealtime(0.5f);
         
         isPowerJumping = false;
         
-        // invincible mode for 1 second
         yield return new WaitForSecondsRealtime(1.0f);
         
-        // invincible mode end
         boxCollider2D.enabled = true;
         
-        // shield fade out effect
         shieldObj.SetActive(false);
         shieldFadeOutObj.SetActive(true);
         yield return new WaitForSecondsRealtime(0.5f);
         shieldFadeOutObj.SetActive(false);
         
     }
-    
-
 }

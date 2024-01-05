@@ -17,7 +17,6 @@ public class FollowCamera : MonoBehaviour {
         Vector3 targetPosition = new Vector3(target.transform.position.x, target.transform.position.y + targetYOffset, -10);
         transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref velocity, smoothTime);
 
-        // move only upwards.
         if (transform.position.y < lastYPosition)
             transform.position = new Vector3(transform.position.x, lastYPosition, -10);
         else

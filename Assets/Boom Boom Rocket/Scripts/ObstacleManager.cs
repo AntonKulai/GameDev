@@ -65,14 +65,10 @@ public class ObstacleManager : MonoBehaviour {
     
     private void Update()
     {
-        // update the map when the distance between the rocket and the map increases.
         if (mapParentList[0].transform.position.y < rocket.transform.position.y - 15)
         {
-            // destroy the furthest map
             Destroy(mapParentList[0]);
-            // remove from list
             mapParentList.RemoveAt(0);
-            // generate new map
             GenerateNewMap();
         }
     }
@@ -83,17 +79,14 @@ public class ObstacleManager : MonoBehaviour {
         GameObject newMapParent = new GameObject();
         newMapParent.transform.position = new Vector3(0, distanceToFirstMap + mapIndex * distanceToNextMap, 0);
        
-        //generate various forms of obstacle
         GenerateObstacle(pfObsCircle, bigCircleNumber, bigCircleSizeMin, bigCircleSizeMax,newMapParent);
         GenerateObstacle(pfObsCircle, smallCircleNumber, smallCircleSizeMin, smallCircleSizeMax,newMapParent);
         GenerateObstacle(pfObsRectangle, rectangleNumber, rectangleSizeMin, rectangleSizeMax,newMapParent );
         GenerateObstacle(pfForceArea, 1, 1f, 1f,newMapParent);
         GenerateObstacle(pfItem, itemNumber, 1f, 1f,newMapParent);
         
-        // increase mapIndex
         mapIndex++;
         
-        //add to list
         mapParentList.Add(newMapParent);
     }
 
@@ -102,7 +95,6 @@ public class ObstacleManager : MonoBehaviour {
     {
         for (int i = 0; i < number; i++)
         {
-            // calculate position of new obstacle
             float posX = Random.Range(leftEnd, rightEnd);
             float posY = Random.Range(
                 distanceToFirstMap + mapIndex * distanceToNextMap + 1, 
@@ -113,7 +105,6 @@ public class ObstacleManager : MonoBehaviour {
             
             float randomSize = Random.Range(minSize, maxSize);
             
-            // add random size, angle
             if (prefab == pfObsRectangle)
             {
                 newObj.transform.localScale = new Vector2(newObj.transform.localScale.x * randomSize, newObj.transform.localScale.y * randomSize );

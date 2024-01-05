@@ -17,7 +17,6 @@ public class GamePlayManager : MonoBehaviour {
 
     private bool isGameOvered = false;
     
-    
     private void Awake()
     {
         if (Instance != null)
@@ -29,7 +28,6 @@ public class GamePlayManager : MonoBehaviour {
     
     void Start()
     {
-        // reset time scale
         Time.timeScale = 1f;
     }
     
@@ -46,14 +44,11 @@ public class GamePlayManager : MonoBehaviour {
         onGameOvered?.Invoke();
         StartCoroutine(GameOverCoroutine());
     }
-
     
     IEnumerator GameOverCoroutine()
     {
-        // wait 1 sec
         yield return new WaitForSecondsRealtime(1.0f);
     
-        // pause game and show game over ui
         Time.timeScale = 0f;
         UIManager.Instance.ShowGameOverUI();
     }
@@ -67,5 +62,4 @@ public class GamePlayManager : MonoBehaviour {
     {
         return isGameOvered;
     }
-
 }

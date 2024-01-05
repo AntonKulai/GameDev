@@ -25,7 +25,6 @@ public class AudioManager : MonoBehaviour {
         Rocket.onRocketPowerJumped += Rocket_OnRocketPowerJumped;
     }
 
-
     private void OnDestroy()
     {
         Rocket.onRocketJumped -= Rocket_OnRocketJumped;
@@ -33,7 +32,6 @@ public class AudioManager : MonoBehaviour {
         Rocket.onRocketPowerJumped -= Rocket_OnRocketPowerJumped;
     }
 
-    
     private void Rocket_OnRocketJumped()
     {
         audioSource.PlayOneShot(jumpClip);
@@ -48,12 +46,4 @@ public class AudioManager : MonoBehaviour {
     {
         audioSource.PlayOneShot(explodeClip);
     }
-
-
-
-    
-
-    
-
-
 }

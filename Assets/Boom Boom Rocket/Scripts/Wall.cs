@@ -14,7 +14,6 @@ public class Wall : MonoBehaviour
 
     void LateUpdate()
     {
-        // the wall follows rocket
         FollowRocket();
     }
 

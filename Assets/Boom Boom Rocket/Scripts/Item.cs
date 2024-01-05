@@ -30,6 +30,4 @@ public class Item : MonoBehaviour {
         position.y -= moveSpeed * Time.deltaTime;
         transform.position = position;
     }
-
-
 }

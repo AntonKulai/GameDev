@@ -18,7 +18,6 @@ public class ScoreManager : MonoBehaviour
     
     void Update()
     {
-        // calculate currentScore with positionY
         int positionY = (int) rocket.transform.position.y / 2;
         if (positionY > currentScore)
         {
