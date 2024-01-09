@@ -32,9 +32,4 @@ public class ScoreManager : MonoBehaviour
             onBestScoreUpdated?.Invoke(currentScore);
         }
     }
-    
-
-    
-    
-
 }
